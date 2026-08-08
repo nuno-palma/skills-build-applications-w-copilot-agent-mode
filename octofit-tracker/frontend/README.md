@@ -11,6 +11,18 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Vite environment variables
+
+This application uses `import.meta.env.VITE_CODESPACE_NAME` to construct backend API requests.
+
+Create a local env file at `frontend/.env.local` and add:
+
+```env
+VITE_CODESPACE_NAME=your-codespace-name
+```
+
+If the variable is not defined, the application falls back to `http://localhost:8000/api/<component>/` to avoid invalid URLs.
+
 ## Expanding the Oxlint configuration
 
 If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
