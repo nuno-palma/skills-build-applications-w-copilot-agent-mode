@@ -3,7 +3,11 @@ import db from './config/database';
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models';
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = Number(process.env.PORT || 8000);
+const codespaceName = process.env.CODESPACE_NAME;
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : `http://localhost:${port}`;
 
 app.use(express.json());
 
@@ -51,7 +55,7 @@ void (async () => {
   try {
     await waitForDatabase();
     app.listen(port, () => {
-      console.log(`Server listening on http://localhost:${port}`);
+      console.log(`Server listening on ${apiBaseUrl}`);
     });
   } catch (error) {
     console.error('Failed to start backend:', error);
