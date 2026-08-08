@@ -1,3 +1,5 @@
+import { createElement } from 'react'
+
 export interface ApiPageProps {
   apiBase: string
 }
@@ -67,13 +69,15 @@ export function renderRecordFields(item: Record<string, unknown>) {
       value == null
         ? '—'
         : typeof value === 'object'
-        ? JSON.stringify(value, null, 2)
-        : String(value)
+          ? JSON.stringify(value, null, 2)
+          : String(value)
 
-    return (
-      <div key={key} className="mb-1">
-        <strong>{key}:</strong> <span className="text-break">{displayValue}</span>
-      </div>
+    return createElement(
+      'div',
+      { key, className: 'mb-1' },
+      createElement('strong', null, `${key}:`),
+      ' ',
+      createElement('span', { className: 'text-break' }, displayValue),
     )
   })
 }
